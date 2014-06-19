@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <link rel="stylesheet" href="jquery.mobile-1.3.1.min.css">
+<link rel="stylesheet" type="text/css"  href="mobiscroll.custom-2.6.2.min.css">
+<script src="jquery-1.9.1.min.js"></script>
+
+<script src="jquery.mobile-1.3.1.min.js"></script>
+<script src="mobiscroll.custom-2.6.2.min.js"></script>
+ 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+    </title>
+  </head>
+  <body>
+	<div data-role="page" data-control-title="Detail" id="self_edit_page" data-theme="e">
+      <div data-theme="b" data-role="header" data-position="fixed">
+        <a id="a_back" data-role="button" data-rel="back" href="#" class="ui-btn-left" data-icon="back" >Back</a>
+        <h3>
+          Detail
+        </h3>
+      
+      </div>
+      <div data-role="content">
+      	<h5 style="color:red" id="error_msg"></h5>
+        <form method="post" action="#">
+        <input type="hidden" name="id" id="id" >
+        <input type="hidden" name="delete_flag" id="delete_flag" >
+        <input type="hidden" name="user_type" id="user_type" >
+        <div role="main" class="ui-content">
+        <div class="ui-field-contain" data-controltype="textinput">
+            <label for="jobid">
+                JOB Id
+            </label>
+            <input name="jobid" id="jobid" placeholder="job id..."  type="text">
+        </div>
+    
+        <div class="ui-field-contain" data-controltype="dateinput">
+            <label for="name">
+                Job Name
+            </label>
+            <input name="name" id="name" placeholder="......." value=""
+            type="text">
+        </div>
+        <div class="ui-field-contain" data-controltype="textinput">
+            <label for="status">
+                Status
+            </label>
+            <input name="status" id="status" placeholder=".........." value=""
+            type="text">
+        </div>
+        <div class="ui-field-contain" data-controltype="textinput">
+            <label for="type">
+                Type
+            </label>
+            <input name="type" id="type" placeholder=".........." value=""
+            type="text">
+        </div>
+        <div class="ui-field-contain" data-controltype="textinput">
+            <label for="bspCode">
+                Bsp Code
+            </label>
+            <input name="bspCode" id="bspCode" placeholder=".........." value="" type="text">
+    </div>
+        <div class="ui-field-contain" data-controltype="textarea">
+            <label for="address">
+                Job Log
+            </label>
+            <textarea name="address" id="address" placeholder=".........."></textarea>
+        </div>
+        
+    	</div>
+        </form>
+    </div>
+    <div data-role="footer" data-theme="e">
+    <div data-role="navbar" data-iconpos="left"  >
+      <ul>
+        <li><a href="#" data-icon="plus">更多</a></li>
+       
+        <li><a href="#" data-icon="check">Resume</a></li>
+        <!--<li><a href="#" data-icon="check"></a></li>
+        <li><a href="#" data-icon="info"></a></li>-->
+      </ul>
+    </div>
+  </div>
+  <script type="text/javascript" language="javascript" >
+  $('#self_edit_page').bind("pagebeforeshow",function(event)
+  <!--$(document).ready(function () -->
+  {
+	  var test =localStorage.getItem('JobID')
+	  $.getJSON("http://10.1.39.84:8080/seurat-web/jersey/job/"+test, function(data) {
+  item=data.job;
+  $("#jobid").val(item.id);
+  $('#name').val(item.name);
+  $('#status').val(item.status);
+  $('#type').val(item.type);
+  $('#bspCode').val(item.bspCode);
+ 
+	  });
+  });
+  </script>
+  </div>
+ 
+  </body>
+</html>

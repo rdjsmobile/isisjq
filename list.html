@@ -1,0 +1,67 @@
+    <!DOCTYPE html>  
+    <html>  
+        <head>  
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            <title></title>  
+            <link rel="stylesheet" href="jquery.mobile-1.3.1.min.css" />  
+            <script src="jquery-1.9.1.min.js"></script>  
+            <script src="jquery.mobile-1.3.1.min.js"></script>  
+              
+            <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <script type="text/javascript" language="javascript" >
+    $(document).ready(function () {
+		var id =localStorage.getItem('jobId');
+		var sta =localStorage.getItem('status');
+		var bspcode =localStorage.getItem('bspcode');
+    $.getJSON("http://10.1.39.84:8080/seurat-web/jersey/job/list?status="+sta +"&id="+id+"&bspCode="+bspcode, function(data) {
+       
+        $.each(data.jobList, function(i, item) {
+			
+            $("#user_view").append(
+			
+			"<li onclick=kset('JobID','"+item.id+"') ><a href='Detail.html' data-transition='slide' ><p>JobID: <span>"+item.id+"</span><p>"+
+			"<p>状态：<span>"+item.status+"</span></p>"+
+			" <p>类型：<span>"+item.type+"</span></p></a></li>"
+			
+					).listview("refresh");
+
+					  
+        });
+        }
+		);	
+
+		
+	})
+</script> 
+        </head>  
+        <body>  
+            <div data-role='page' id="content_page" data-theme="b">  
+                <div data-role='header'>  
+                    <a id="a_back" data-role="button" data-rel="back" href="#" class="ui-btn-left" data-icon="back" >Back</a>
+  <h1>JOB List</h1>
+   
+                </div>  
+                <div data-role='content'>  
+                    <div id="user_cont">  
+                        <ul data-role='listview' id="user_view">  
+                           
+                     
+                        
+                        </ul>  
+                    </div>  
+                </div>  
+            </div>  
+            <!--localStorage页面跳转存储数据 -->
+<script type="text/javascript" language="javascript" >
+ function kset(key,value){
+
+window.localStorage.setItem(key, value);
+}</script>
+<script type="text/javascript" language="javascript" >
+
+</script>
+
+        </body>  
+    </html>  
