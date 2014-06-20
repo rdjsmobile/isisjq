@@ -25,9 +25,7 @@
       <div data-role="content">
       	<h5 style="color:red" id="error_msg"></h5>
         <form method="post" action="#">
-        <input type="hidden" name="id" id="id" >
-        <input type="hidden" name="delete_flag" id="delete_flag" >
-        <input type="hidden" name="user_type" id="user_type" >
+        
         <div role="main" class="ui-content">
         <div class="ui-field-contain" data-controltype="textinput">
             <label for="jobid">
@@ -76,10 +74,22 @@
     <div data-role="footer" data-theme="e">
     <div data-role="navbar" data-iconpos="left"  >
       <ul>
-        <li><a href="#" data-icon="plus">更多</a></li>
+        <li><a data-icon="plus" data-rel="popup">更多</a>
+ <!-- 弹出框初始化-->       
+        <div data-role="popup" id="popupBasic" data-transition='flip' data-position-to='window' data-dismissible="false"> 
+<form style="padding:10px 20px;">   
+        <h3>ARE YOU SURE RESUME</h3>   
+        <button type="submit" data-theme="b">NO</button>
+        <button type="submit"  id="resume-yes" data-theme="b">YES</button> 
+    </form>  
+</div> 
+        </li>
+        <li><a href="#popupBasic" data-rel="popup" id='resume' data-icon="check">Resume</a>
+        
+        </li>
+       <!--	 <li><input type='button' id='resume' value='resume' data-icon="check"></li>
        
-        <li><a href="#" data-icon="check">Resume</a></li>
-        <!--<li><a href="#" data-icon="check"></a></li>
+        <li><a href="#" data-icon="check"></a></li>
         <li><a href="#" data-icon="info"></a></li>-->
       </ul>
     </div>
@@ -96,11 +106,26 @@
   $('#status').val(item.status);
   $('#type').val(item.type);
   $('#bspCode').val(item.bspCode);
- 
+	if (item.status=='FAILED'){
+		$("#resume").show();
+		}else{		$("#resume").hide();}
 	  });
   });
   </script>
-  </div>
- 
+
+<script type="text/javascript" language="javascript" >
+ var id =localStorage.getItem('JobID');
+ $("#resume-yes").bind('click',function(){
+	$.ajax({
+   type: "POST",
+   url: "http://10.1.39.84:8080/seurat-web/jersey/job/resume/"+id,
+   success: function(){
+     window.location.reload()
+   }
+});    
+	 });
+ </script>
+
+   </div>
   </body>
 </html>
