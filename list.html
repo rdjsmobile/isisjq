@@ -15,7 +15,8 @@
 		var id =localStorage.getItem('jobId');
 		var sta =localStorage.getItem('status');
 		var bspcode =localStorage.getItem('bspcode');
-    $.getJSON("http://10.1.39.84:8080/seurat-web/jersey/job/list?status="+sta +"&id="+id+"&bspCode="+bspcode, function(data) {
+		var page=localStorage.getItem('pageNum');
+    $.getJSON("http://10.1.39.84:8080/seurat-web/jersey/job/list?page="+page+"&status="+sta +"&id="+id+"&bspCode="+bspcode, function(data) {
        
         $.each(data.jobList, function(i, item) {
 			
@@ -59,8 +60,14 @@
 
 window.localStorage.setItem(key, value);
 }</script>
-<script type="text/javascript" language="javascript" >
-
+<script>
+$(document).on("pageinit","#content_page",function(){
+  $("user_cont").on("swipeleft",function(){
+	var page=localStorage.getItem('pageNum');
+    window.localStorage.setItem("pageNum",page+1);
+	window.location.reload();
+  });                       
+});
 </script>
 
         </body>  
