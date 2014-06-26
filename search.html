@@ -5,16 +5,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="jquery.mobile-1.3.1.min.css">
+<link rel="stylesheet" href="jquery.mobile-1.3.2.css">
 <link rel="stylesheet" type="text/css"  href="mobiscroll.custom-2.6.2.min.css">
-<script src="jquery-1.8.3.min.js"></script>
-<script src="jquery.mobile-1.3.1.min.js"></script>
+<script src="jquery.js"></script>
+<script src="jquery.mobile-1.3.2.js"></script>
 <script src="mobiscroll.custom-2.6.2.min.js"></script>
 
 </head>
 <body>
 
-<div data-role="page" id="pageone"  data-theme="e">
+<div data-role="page" id="pageone"  data-theme="c">
 
   <div data-role="header">
   
@@ -41,7 +41,7 @@
       	<option value="SUSPENDING">SUSPENDING</option>
       	<option value="SUSPENDED">SUSPENDED</option>
       	<option value="FAILED">FAILED</option>
-      	<option value="COMPLETED" selected>COMPLETED</option>
+      	<option value="COMPLETED">COMPLETED</option>
     </select>
     <br><br>
  
@@ -58,7 +58,7 @@
     <br><br>
  
     <label for="switch">OTHERS:</label>
-    <select name="switch1" id="switch"  data-role="slider" data-theme="a">
+    <select name="switch1" id="switch"  data-role="slider" data-theme="c">
       <option value="on" ></option>
       <option value="off" selected='true' ></option>
     </select>
@@ -95,7 +95,7 @@
  </div>
   </div>
   <input type="submit" id='sum' data-inline="true" value="submit" onClick="kset()">
-  <input type="reset" id='reset' data-inline="true" value="reset" onClick="rset()">
+  <input type="reset" id='reset' data-inline="true" value="reset" >
   </form>
   </div>
 </div>
@@ -134,9 +134,15 @@ $('input:jqmData(role="datebox")').mobiscroll().date({
 	var id =$("#name").val();
 	var sta =$("#status").val();
 	var bspCode =$("#code").val() == null ? "" : $("#code").val();
+	var type =$("#type").val();
+	var startTime =$("#startTime").val();
+	var endTime =$("#endTime").val();
 	window.localStorage.setItem('jobId', id);
 	window.localStorage.setItem('status', sta);
 	window.localStorage.setItem('bspcode', bspCode);
+	window.localStorage.setItem('type', type);
+	window.localStorage.setItem('startTime', startTime);
+	window.localStorage.setItem('endTime', endTime);
 	window.localStorage.setItem("pageNum",1);
 	$.ajax(
 	)
@@ -179,3 +185,4 @@ $( function() {
 
 </body>
 </html>
+
