@@ -20,13 +20,14 @@
 		var startTime =localStorage.getItem('startTime');
 		var endTime =localStorage.getItem('endTime');
 		var page=localStorage.getItem('pageNum');
+			
     $.getJSON("http://10.1.39.84:8080/seurat-web/jersey/job/list?page="+page+"&status="+sta +"&id="+id+"&bspCode="+bspcode+"&type="+type+"&date="+startTime, function(data) {
        
         $.each(data.jobList, function(i, item) {
 			
             $("#user_view").append(
 			
-						"<li onclick=kset('JobID','"+item.id+"') ><a><p>JobID: <span>"+item.id+"</span></p>"+
+						"<li onclick=kset('JobID','"+item.id+"') ><a href='Detail.html' data-transition='slide'><p>JobID: <span>"+item.id+"</span></p>"+
 						"<p>status：<span>"+item.status+"</span></p>"+
 						"<p>type：<span>"+item.type+"</span></p>"+
 						"<p>startTime：<span>"+item.actualStartTime+"</span></p></a></li>"
@@ -36,9 +37,9 @@
         });
      
   		
-  		$("a").bind("click",function(){
-	  		$.mobile.changePage("Detail.html", "slideup");
-	  	})
+  		//$("a").bind("click",function(){
+	  	//$.mobile.changePage("Detail.html", "slideup");
+	  	//})
      }
 		);	
 		
@@ -103,7 +104,7 @@ function pullUpAction () {
 			
             $("#user_view").append(
 			
-						"<li onclick=kset('JobID','"+item.id+"') ><a><p>JobID: <span>"+item.id+"</span><p>"+
+						"<li onclick=kset('JobID','"+item.id+"') ><a href='Detail.html' data-transition='slide'><p>JobID: <span>"+item.id+"</span><p>"+
 						"<p>状态：<span>"+item.status+"</span></p>"+
 						"<p>type：<span>"+item.type+"</span></p>"+
 						"<p>startTime：<span>"+item.actualStartTime+"</span></p></a></li>"
@@ -111,9 +112,9 @@ function pullUpAction () {
 						).listview("refresh");			  
         });
         
-        $("a").bind("click",function(){
-	  			$.mobile.changePage("Detail.html", "slideup");
-	  		})
+        //$("a").bind("click",function(){
+	  		//$.mobile.changePage("Detail.html", "slideup");
+	  		//})
 		});
 		
 		myScroll.refresh();		// 数据加载完成后，调用界面更新方法 Remember to refresh when contents are loaded (ie: on ajax completion)
@@ -186,15 +187,15 @@ document.addEventListener('touchmove', function (e) { e.preventDefault(); }, fal
 document.addEventListener('DOMContentLoaded', loaded, false); 
 
 </script>
-        </head>  
+</head>  
         <body>  
-            <div data-role='page' id="content_page" data-theme="b">  
-                <div data-role='header'>  
+            <div data-role='page' id="content_page" data-theme="d">  
+                <div data-role='header' data-theme="b" >  
                     <a id="a_back" data-role="button" data-rel="back" href="#" class="ui-btn-left" data-icon="back" >Back</a>
-  					<h1>JOB List</h1>
+  									<h1>JOB List</h1>
                 </div>  
                 <div id="wrapper">
-				<div id="scroller">
+								<div id="scroller">
                 <div data-role='content'>  
                     <div id="user_cont">  
                         <ul data-role='listview' id="user_view">  
@@ -204,8 +205,8 @@ document.addEventListener('DOMContentLoaded', loaded, false);
                         </ul>  
                     </div>
                     <div id="pullUp">
-					<span class="pullUpIcon"></span><p class="pullUpLabel">上拉加载更多...</p>
-					</div>  
+								<span class="pullUpIcon"></span><p class="pullUpLabel">上拉加载更多...</p>
+									</div>  
                   </div>  
                   </div>  
                 </div>  
